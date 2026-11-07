@@ -4,9 +4,10 @@
   background: #c5cfd6; padding: 28px 34px; display: flex;
   align-items: center; gap: 32px;
 }
-.print-header-text h1 { font-size: 32px; font-weight: 800; letter-spacing: .5px; margin-bottom: 12px; text-transform: uppercase; }
+.print-header-text { min-width: 0; }
+.print-header-text h1 { font-size: 32px; font-weight: 800; letter-spacing: .5px; margin-bottom: 12px; text-transform: uppercase; overflow-wrap: anywhere; }
 .print-header-text p { font-size: 16px; font-weight: 700; }
-.print-table-wrapper { width: 100%; overflow-x: auto; }
+.print-table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .buying-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .buying-table th, .buying-table td {
   border: 2px solid #000; text-align: center; vertical-align: middle;
@@ -36,12 +37,74 @@
   padding-right: 18px; font-size: 15px; font-weight: 500;
 }
 .summary-row td.total-box-cell { border: 2px solid #000; background: #fff; font-size: 15px; font-weight: 600; }
-.print-footer-actions { margin-top: 32px; display: flex; justify-content: center; gap: 16px; }
+.print-footer-actions { margin-top: 32px; display: flex; justify-content: center; gap: 16px; padding: 0 12px; }
+
 @media (max-width: 640px) {
-  .print-header { padding: 18px; gap: 16px; }
-  .print-header-text h1 { font-size: 21px; }
-  .buying-table { min-width: 650px; }
+  .print-page { padding-bottom: 24px; }
+
+  .print-header {
+    padding: 16px 14px;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .print-header .logo-circle {
+    width: 54px;
+    height: 54px;
+    margin: 0;
+    flex: 0 0 54px;
+    font-size: 13px;
+  }
+
+  .print-header-text h1 {
+    font-size: clamp(16px, 4.5vw, 20px);
+    line-height: 1.2;
+    letter-spacing: .2px;
+    margin-bottom: 6px;
+  }
+
+  .print-header-text p { font-size: 12px; line-height: 1.35; }
+
+  /* The buying list stays a real table and can be swiped horizontally on phones. */
+  .print-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-bottom: 4px;
+  }
+
+  .buying-table { min-width: 560px; }
+  .buying-table th, .buying-table td { height: 58px; font-size: 12px; }
+  .qty-controls { gap: 6px; }
+  .qty-btn { width: 28px; height: 28px; }
+  .subtotal-cell-inner { min-height: 56px; padding-right: 64px; }
+  .remove-row-btn { right: 5px; padding: 5px 6px; font-size: 11px; }
+  .summary-row td.no-border-cell { padding-right: 10px; font-size: 13px; }
+  .summary-row td.total-box-cell { font-size: 13px; }
+
+  .print-footer-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin: 16px 0 0;
+    padding: 0 14px;
+  }
+
+  .print-footer-actions .theme-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    font-size: 12px;
+  }
 }
+
+@media (max-width: 360px) {
+  .print-header { padding: 14px 10px; gap: 9px; }
+  .print-header .logo-circle { width: 48px; height: 48px; flex-basis: 48px; }
+  .print-header-text h1 { font-size: 16px; }
+  .buying-table { min-width: 540px; }
+}
+
 @media print {
   body { background: #fff; }
   .no-print { display: none !important; }
