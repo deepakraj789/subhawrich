@@ -9,10 +9,10 @@
 </head>
 <body>
   <div class="page-shell">
-    <header class="nav-bar">
+    <header class="nav-bar" id="main-navbar">
       <a class="logo-circle" href="index.html" aria-label="Nexthealer home">LOGO</a>
       <nav class="nav-left-group" aria-label="Main navigation">
-        <button id="btn-home" class="theme-btn active-nav" type="button" data-section="home">HOME</button>
+        <button id="btn-home" class="theme-btn active-nav" type="button" data-section="home" aria-current="location">HOME</button>
         <button id="btn-about" class="theme-btn" type="button" data-section="about">ABOUT US</button>
         <button id="btn-contact" class="theme-btn" type="button" data-section="contact">CONTACT</button>
       </nav>
@@ -20,16 +20,18 @@
     </header>
 
     <main class="index-content-box">
-      <section id="section-home" class="section-panel active-section">
-        <h1>HOME</h1>
+      <section id="section-home" class="section-panel" aria-labelledby="heading-home">
+        <h1 id="heading-home">HOME</h1>
         <p>CONTENTS FOR HOME SECTION</p>
       </section>
-      <section id="section-about" class="section-panel">
-        <h1>ABOUT US</h1>
+
+      <section id="section-about" class="section-panel" aria-labelledby="heading-about">
+        <h1 id="heading-about">ABOUT US</h1>
         <p>CONTENTS FOR ABOUT US SECTION</p>
       </section>
-      <section id="section-contact" class="section-panel">
-        <h1>CONTACT</h1>
+
+      <section id="section-contact" class="section-panel" aria-labelledby="heading-contact">
+        <h1 id="heading-contact">CONTACT</h1>
         <p>CONTENTS FOR CONTACT SECTION</p>
       </section>
     </main>

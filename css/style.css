@@ -1,48 +1,183 @@
 /* Shared styles */
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { background: #555; min-height: 100vh; overflow-x: hidden; }
-.page-shell { min-height: 100vh; padding: 18px 24px 24px; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #555;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding: 18px 24px 24px;
+}
+
 .nav-bar {
-  background: #c5cfd6; min-height: 76px; border-radius: 40px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px 0 0; box-shadow: 0 6px 14px rgba(0,0,0,.35);
-  position: relative; margin-bottom: 24px; gap: 16px;
+  background: #c5cfd6;
+  min-height: 76px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px 0 0;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .35);
+  position: sticky;
+  top: 18px;
+  z-index: 1000;
+  margin-bottom: 24px;
+  gap: 16px;
+  transform: translateY(0);
+  transition: transform .25s ease;
+  will-change: transform;
 }
+
+/* Applied by navigation.js while the visitor scrolls down. */
+.nav-bar.nav-hidden {
+  transform: translateY(calc(-100% - 24px));
+}
+
 .logo-circle {
-  width: 84px; height: 84px; background: #93b4d1; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; font-weight: 500; color: #000; text-decoration: none;
-  cursor: pointer; user-select: none; flex-shrink: 0; margin-left: -2px;
+  width: 84px;
+  height: 84px;
+  background: #93b4d1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  margin-left: -2px;
 }
-.nav-left-group { display: flex; align-items: center; gap: 28px; margin-left: 18px; flex: 1; }
+
+.nav-left-group {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-left: 18px;
+  flex: 1;
+}
+
 .theme-btn {
-  min-width: 136px; min-height: 46px; padding: 0 24px; border: 0;
-  border-radius: 25px; background: linear-gradient(90deg,#8b5cf6 0%,#5eead4 100%);
-  color: #000; font-size: 15px; font-weight: 500; letter-spacing: .4px;
-  text-transform: uppercase; cursor: pointer; box-shadow: 0 5px 10px rgba(0,0,0,.3);
-  display: inline-flex; align-items: center; justify-content: center;
-  text-decoration: none; white-space: nowrap; transition: transform .1s ease;
+  min-width: 136px;
+  min-height: 46px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #8b5cf6 0%, #5eead4 100%);
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .1s ease;
 }
-.theme-btn:active { transform: scale(.98); }
-.theme-btn.active-nav { background: linear-gradient(90deg,#0d9488 0%,#84cc16 100%); }
+
+.theme-btn:active {
+  transform: scale(.98);
+}
+
+.theme-btn.active-nav {
+  background: linear-gradient(90deg, #0d9488 0%, #84cc16 100%);
+}
+
 .index-content-box {
-  background: #c5cfd6; border-radius: 30px; min-height: calc(100vh - 144px);
-  width: 100%; display: flex; flex-direction: column; align-items: center;
-  justify-content: center; padding: 40px; text-align: center; color: #000;
+  background: #c5cfd6;
+  border-radius: 30px;
+  width: 100%;
+  color: #000;
+  overflow: hidden;
 }
-.section-panel { display: none; max-width: 720px; }
-.section-panel.active-section { display: block; }
-.section-panel h1 { font-size: 24px; font-weight: 600; margin-bottom: 14px; text-transform: uppercase; }
-.section-panel p { font-size: 16px; line-height: 1.6; }
+
+/* All three sections remain in the document and stack vertically. */
+.section-panel {
+  width: 100%;
+  min-height: calc(100vh - 144px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  scroll-margin-top: 112px;
+}
+
+.section-panel h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.section-panel p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
 @media (max-width: 1024px) {
-  .nav-left-group { gap: 12px; margin-left: 12px; }
-  .theme-btn { min-width: 105px; padding: 0 14px; font-size: 13px; }
+  .nav-left-group {
+    gap: 12px;
+    margin-left: 12px;
+  }
+
+  .theme-btn {
+    min-width: 105px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
 }
+
 @media (max-width: 640px) {
-  .page-shell { padding: 12px; }
-  .nav-bar { border-radius: 24px; padding: 10px; flex-wrap: wrap; justify-content: center; }
-  .logo-circle { width: 62px; height: 62px; }
-  .nav-left-group { order: 3; flex-basis: 100%; justify-content: center; margin: 0; flex-wrap: wrap; }
-  .theme-btn { min-width: 0; min-height: 42px; padding: 0 15px; }
-  .index-content-box { min-height: calc(100vh - 150px); padding: 24px; }
+  .page-shell {
+    padding: 12px;
+  }
+
+  .nav-bar {
+    top: 12px;
+    border-radius: 24px;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo-circle {
+    width: 62px;
+    height: 62px;
+  }
+
+  .nav-left-group {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    margin: 0;
+    flex-wrap: wrap;
+  }
+
+  .theme-btn {
+    min-width: 0;
+    min-height: 42px;
+    padding: 0 15px;
+  }
+
+  .section-panel {
+    min-height: calc(100vh - 126px);
+    padding: 24px;
+    scroll-margin-top: 100px;
+  }
 }
