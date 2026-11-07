@@ -8,8 +8,16 @@
   <link rel="stylesheet" href="css/print.css">
   <script src="js/cart.js" defer></script>
   <script src="js/print.js" defer></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLus+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    defer></script>
+  <script src="js/pdf-download.js" defer></script>
 </head>
 <body class="print-page">
+  <div id="pdf-content">
   <header class="print-header">
     <a class="logo-circle" href="products.html" aria-label="Back to products">LOGO</a>
     <div class="print-header-text">
@@ -42,10 +50,12 @@
       </tfoot>
     </table>
   </main>
+  </div>
 
   <div class="print-footer-actions no-print">
     <a class="theme-btn" href="products.html">BACK TO PRODUCTS</a>
     <button class="theme-btn" id="print-button" type="button">PRINT</button>
+    <button class="theme-btn" id="download-pdf-button" type="button">DOWNLOAD PDF</button>
   </div>
 </body>
 </html>
