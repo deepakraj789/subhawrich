@@ -1,0 +1,51 @@
+/* Product catalogue styles */
+.search-group { display: flex; align-items: center; gap: 12px; margin-left: 40px; flex: 1; }
+.search-input {
+  width: min(260px, 100%); height: 46px; background: #b0b0b0;
+  border: 0; border-radius: 25px; padding: 0 20px; font-size: 15px;
+  color: #000; text-align: center; outline-offset: 3px;
+}
+.search-input::placeholder { color: #111; opacity: .85; }
+.search-icon-btn {
+  width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%;
+  background: #777; border: 0; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,.28);
+}
+.products-grid {
+  display: grid; grid-template-columns: repeat(4,minmax(0,1fr));
+  column-gap: 44px; row-gap: 38px; padding: 18px 34px;
+  max-width: 1360px; margin: 0 auto;
+}
+.product-item { display: flex; flex-direction: column; align-items: center; gap: 14px; min-width: 0; }
+.product-card {
+  background: #c5cfd6; border-radius: 32px; width: 100%; padding: 14px 18px 18px;
+  display: flex; flex-direction: column; align-items: center;
+  color: #000; text-decoration: none;
+}
+.price-badge {
+  background: #a8a8a8; padding: 10px 16px; border-radius: 8px;
+  font-size: 15px; font-weight: 500; margin-bottom: -14px; z-index: 1; text-align: center;
+}
+.product-image-box {
+  background: #b5b5b5; width: 100%; aspect-ratio: 1; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: #000; margin-bottom: 14px;
+}
+.product-name-box {
+  background: #a8a8a8; width: 100%; padding: 13px 10px;
+  border-radius: 8px; text-align: center; font-size: 15px;
+}
+.cart-action-btn {
+  width: 100%; min-height: 46px; border: 0; border-radius: 8px;
+  background: linear-gradient(90deg,#8b5cf6 0%,#5eead4 100%);
+  color: #000; font-size: 15px; font-weight: 500; text-transform: uppercase;
+  cursor: pointer; box-shadow: 0 5px 10px rgba(0,0,0,.3);
+}
+.cart-action-btn.in-cart { background: linear-gradient(90deg,#0d9488 0%,#84cc16 100%); }
+.empty-results { grid-column: 1 / -1; color: #fff; text-align: center; padding: 40px 12px; }
+@media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 640px) {
+  .products-grid { grid-template-columns: 1fr; padding: 12px 4px; }
+  .search-group { margin-left: 0; }
+  .search-input { width: min(190px, 45vw); }
+}

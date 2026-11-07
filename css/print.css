@@ -1,0 +1,50 @@
+/* Buying-list and print styles */
+.print-page { background: #f4f6f8; color: #000; padding-bottom: 40px; }
+.print-header {
+  background: #c5cfd6; padding: 28px 34px; display: flex;
+  align-items: center; gap: 32px;
+}
+.print-header-text h1 { font-size: 32px; font-weight: 800; letter-spacing: .5px; margin-bottom: 12px; text-transform: uppercase; }
+.print-header-text p { font-size: 16px; font-weight: 700; }
+.print-table-wrapper { width: 100%; overflow-x: auto; }
+.buying-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.buying-table th, .buying-table td {
+  border: 2px solid #000; text-align: center; vertical-align: middle;
+  height: 68px; font-size: 14px; color: #000; overflow-wrap: anywhere;
+}
+.buying-table th { background: #d4d4d4; font-weight: 700; text-transform: uppercase; }
+.buying-table td { background: #fff; }
+.col-num { width: 8%; } .col-name { width: 22%; } .col-qty { width: 14%; }
+.col-price { width: 26%; } .col-subtotal { width: 30%; }
+.qty-controls { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.qty-btn {
+  width: 24px; height: 24px; border: 1px solid #000; background: #d4d4d4;
+  color: #000; font-weight: 700; border-radius: 4px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; line-height: 1;
+}
+.subtotal-cell-inner {
+  display: flex; align-items: center; justify-content: center;
+  position: relative; width: 100%; min-height: 64px; padding: 0 70px 0 12px;
+}
+.remove-row-btn {
+  position: absolute; right: 8px; padding: 5px 8px; border: 1px solid #000;
+  border-radius: 6px; background: #e57373; color: #000; font-size: 12px;
+  font-weight: 600; cursor: pointer;
+}
+.summary-row td.no-border-cell {
+  border: 0; background: transparent; text-align: right;
+  padding-right: 18px; font-size: 15px; font-weight: 500;
+}
+.summary-row td.total-box-cell { border: 2px solid #000; background: #fff; font-size: 15px; font-weight: 600; }
+.print-footer-actions { margin-top: 32px; display: flex; justify-content: center; gap: 16px; }
+@media (max-width: 640px) {
+  .print-header { padding: 18px; gap: 16px; }
+  .print-header-text h1 { font-size: 21px; }
+  .buying-table { min-width: 650px; }
+}
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-page { padding: 0; }
+  .print-table-wrapper { overflow: visible; }
+}

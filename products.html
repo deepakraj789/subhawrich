@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXTHEALER | Products</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/products.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/products.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="nav-bar">
+      <a class="logo-circle" href="index.html" aria-label="Back to home">LOGO</a>
+      <div class="search-group">
+        <input type="search" id="product-search" class="search-input"
+               placeholder="Search products" aria-label="Search products">
+        <button class="search-icon-btn" id="search-button" type="button" aria-label="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+               stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5"></circle>
+            <line x1="15.5" y1="15.5" x2="21" y2="21"></line>
+            <path d="M13 6.5 L14 4.5 L15 6.5 L17 7.5 L15 8.5 L14 10.5 L13 8.5 L11 7.5 Z"
+                  fill="#ffffff" stroke="none"></path>
+          </svg>
+        </button>
+      </div>
+      <a class="theme-btn" href="print.html">MAKE PDF</a>
+    </header>
+
+    <main class="products-grid" id="products-grid-container" aria-live="polite"></main>
+  </div>
+</body>
+</html>

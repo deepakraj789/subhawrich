@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXTHEALER | Buying List</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css">
+  <script src="js/cart.js" defer></script>
+  <script src="js/print.js" defer></script>
+</head>
+<body class="print-page">
+  <header class="print-header">
+    <a class="logo-circle" href="products.html" aria-label="Back to products">LOGO</a>
+    <div class="print-header-text">
+      <h1>NEXTHEALER - PRODUCT BUYING LIST</h1>
+      <p id="print-date"></p>
+    </div>
+  </header>
+
+  <main class="print-table-wrapper">
+    <table class="buying-table">
+      <thead>
+        <tr>
+          <th class="col-num">#</th>
+          <th class="col-name">PRODUCT NAME</th>
+          <th class="col-qty">QTY</th>
+          <th class="col-price">UNIT PRICE</th>
+          <th class="col-subtotal">SUBTOTAL</th>
+        </tr>
+      </thead>
+      <tbody id="print-table-body"></tbody>
+      <tfoot>
+        <tr class="summary-row">
+          <td colspan="4" class="no-border-cell">GST 10%</td>
+          <td id="gst-value" class="total-box-cell">₹0</td>
+        </tr>
+        <tr class="summary-row">
+          <td colspan="4" class="no-border-cell">GENERATED TOTAL</td>
+          <td id="generated-total-value" class="total-box-cell">₹0</td>
+        </tr>
+      </tfoot>
+    </table>
+  </main>
+
+  <div class="print-footer-actions no-print">
+    <a class="theme-btn" href="products.html">BACK TO PRODUCTS</a>
+    <button class="theme-btn" id="print-button" type="button">PRINT</button>
+  </div>
+</body>
+</html>
