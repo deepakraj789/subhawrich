@@ -1,18 +1,22 @@
-// Creates a PDF download of the buying list without opening the print dialog.
+// Downloads the buying list as an A4 portrait PDF.
+// Interactive quantity and remove controls are excluded from the PDF render only.
 document.addEventListener("DOMContentLoaded", () => {
   const downloadButton = document.getElementById("download-pdf-button");
-  if (!downloadButton) return;
+  const pdfContent = document.getElementById("pdf-content");
+
+  if (!downloadButton || !pdfContent) return;
+
+  // Keep this selector limited to the cart controls, not the quantity text itself.
+  const excludedControlsSelector = [
+    "button.qty-btn",
+    "button.remove-row-btn",
+    ".qty-controls > button",
+    ".subtotal-cell-inner > button"
+  ].join(", ");
 
   downloadButton.addEventListener("click", async () => {
     if (typeof window.html2pdf !== "function") {
-      window.alert("The PDF tool could not load. Check your internet connection and try again.");
-      return;
-    }
-
-    const header = document.querySelector(".print-header");
-    const tableWrapper = document.querySelector(".print-table-wrapper");
-    if (!header || !tableWrapper) {
-      window.alert("The buying list could not be found.");
+      window.alert("The PDF tool could not load. Check that the PDF library script loaded successfully.");
       return;
     }
 
@@ -20,34 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadButton.disabled = true;
     downloadButton.textContent = "PREPARING PDF...";
 
-    // Work on a copy so the on-screen table and its controls remain untouched.
-    const exportRoot = document.createElement("div");
-    exportRoot.className = "pdf-export-root";
-    exportRoot.style.cssText = [
-      "position: fixed",
-      "left: 0",
-      "top: 0",
-      "width: 1100px",
-      "padding: 24px",
-      "background: #ffffff",
-      "color: #000000",
-      "box-sizing: border-box",
-      "opacity: 0",
-      "z-index: -1",
-      "pointer-events: none"
-    ].join(";");
-
-    exportRoot.appendChild(header.cloneNode(true));
-    exportRoot.appendChild(tableWrapper.cloneNode(true));
-    exportRoot.querySelectorAll(".no-print").forEach(element => element.remove());
-    exportRoot.querySelector(".print-table-wrapper").style.overflow = "visible";
-    exportRoot.querySelector(".buying-table").style.minWidth = "0";
-    document.body.appendChild(exportRoot);
-
     try {
       await window.html2pdf()
         .set({
-          margin: 8,
+          margin: [10, 10, 10, 10],
           filename: "nexthealer-buying-list.pdf",
           image: { type: "jpeg", quality: 0.98 },
           html2canvas: {
@@ -56,27 +36,61 @@ document.addEventListener("DOMContentLoaded", () => {
             backgroundColor: "#ffffff",
             scrollX: 0,
             scrollY: 0,
+
+            // Primary exclusion: html2canvas skips these elements while rendering.
+            // nodeType/matches are used instead of instanceof Element because
+            // the callback may receive elements from its cloned iframe document.
+            ignoreElements: element =>
+              Boolean(
+                element &&
+                element.nodeType === 1 &&
+                typeof element.matches === "function" &&
+                element.matches(excludedControlsSelector)
+              ),
+
+            // Secondary exclusion: physically remove the same controls from
+            // html2canvas's cloned document. The live page is never modified.
             onclone: clonedDocument => {
-              const clonedRoot = clonedDocument.querySelector(".pdf-export-root");
-              if (clonedRoot) {
-                clonedRoot.style.opacity = "1";
-                clonedRoot.style.position = "static";
-                clonedRoot.style.left = "auto";
-                clonedRoot.style.top = "auto";
-                clonedRoot.style.zIndex = "auto";
+              clonedDocument
+                .querySelectorAll(`#pdf-content ${excludedControlsSelector}`)
+                .forEach(element => element.remove());
+
+              const clonedContent = clonedDocument.getElementById("pdf-content");
+              const clonedWrapper = clonedDocument.querySelector(".print-table-wrapper");
+              const clonedTable = clonedDocument.querySelector(".buying-table");
+
+              if (clonedContent) {
+                clonedContent.style.width = "100%";
+                clonedContent.style.maxWidth = "none";
+                clonedContent.style.backgroundColor = "#ffffff";
+              }
+              if (clonedWrapper) {
+                clonedWrapper.style.width = "100%";
+                clonedWrapper.style.overflow = "visible";
+              }
+              if (clonedTable) {
+                clonedTable.style.width = "100%";
+                clonedTable.style.minWidth = "0";
+                clonedTable.style.tableLayout = "fixed";
               }
             }
           },
-          jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
-          pagebreak: { mode: ["css", "legacy"] }
+          jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
+          },
+          pagebreak: {
+            mode: ["css", "legacy"],
+            avoid: ["tr"]
+          }
         })
-        .from(exportRoot)
+        .from(pdfContent)
         .save();
     } catch (error) {
       console.error("PDF generation failed:", error);
-      window.alert("The PDF could not be generated. Please try again.");
+      window.alert("The PDF could not be generated. Check the browser console for details.");
     } finally {
-      exportRoot.remove();
       downloadButton.disabled = false;
       downloadButton.textContent = originalLabel;
     }
