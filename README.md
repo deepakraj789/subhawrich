@@ -1,5 +1,3 @@
-# NEXTHEALER prototype
-
 ## Run
 Open `index.html` in a browser. For the most reliable local testing, serve this folder through a local static web server.
 

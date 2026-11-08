@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await window.html2pdf()
         .set({
           margin: [10, 10, 10, 10],
-          filename: "nexthealer-buying-list.pdf",
+          filename: "subhaw-rich-buying-list.pdf",
           image: { type: "jpeg", quality: 0.98 },
           html2canvas: {
             scale: 2,

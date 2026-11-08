@@ -1,12 +1,8 @@
 // Shared cart storage for products.html and print.html.
 (() => {
-  const COOKIE_NAME = "nexthealer_cart";
+  const COOKIE_NAME = "subhaw_rich_cart";
   const COOKIE_MAX_AGE = 60 * 60 * 24; // Preserve the prototype's one-day expiry.
-  const DEMO_CART = [
-    { id: 1, name: "Tulsi", price: 50, qty: 2 },
-    { id: 2, name: "Ear Droap", price: 60, qty: 3 },
-    { id: 3, name: "Eye droap", price: 70, qty: 2 }
-  ];
+  const DEMO_CART = [];
   let memoryCart = null;
 
   function isValidCart(value) {
